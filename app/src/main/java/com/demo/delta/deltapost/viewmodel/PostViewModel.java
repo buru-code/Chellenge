@@ -13,14 +13,21 @@ import java.util.List;
 
 public class PostViewModel extends AndroidViewModel {
 
-    private LiveData<List<Post>> postListObservable;
+    private final LiveData<List<Post>> postListObservable;
+    private final PostRepository postRepository;
 
-    public PostViewModel(@NonNull Application application) {
+
+    public PostViewModel(@NonNull Application application, @NonNull PostRepository postRepsository) {
         super(application);
-        postListObservable = PostRepository.getInstance().getAllPosts();
+        postListObservable = postRepsository.getInstance().getAllPosts();
+        this.postRepository = postRepsository;
     }
 
     public LiveData<List<Post>> getPostListObservable(){
         return postListObservable;
+    }
+
+    public LiveData<Post> getPostInfo(int id) {
+        return postRepository.getPostInfo(id);
     }
 }

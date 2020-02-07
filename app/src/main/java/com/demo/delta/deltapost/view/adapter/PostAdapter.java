@@ -12,7 +12,7 @@ import com.demo.delta.deltapost.model.Post;
 import java.util.List;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder>{
-    List<? extends Post> postList;
+    private List<? extends Post> postList;
 
     @NonNull
     @Override
@@ -54,7 +54,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
                     Post post = postList.get(newItemPosition);
                     Post oldPost = postList.get(oldItemPosition);
 
-                    return post.getTitle() == oldPost.getTitle();
+                    return post.getTitle().equals(oldPost.getTitle());
                 }
             });
             this.postList = postList;

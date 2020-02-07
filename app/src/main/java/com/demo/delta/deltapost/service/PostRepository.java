@@ -1,5 +1,6 @@
 package com.demo.delta.deltapost.service;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
@@ -49,6 +50,23 @@ public class PostRepository {
             @Override
             public void onFailure(Call<List<Post>> call, Throwable t) {
                 //TODO  Try error  later ...
+                data.setValue(null);
+            }
+        });
+        return data;
+    }
+
+
+    public LiveData<Post> getPostInfo(int id) {
+        final MutableLiveData<Post> data = new MutableLiveData<>();
+        service.getPostInfo().enqueue(new Callback<Post>() {
+            @Override
+            public void onResponse(@NonNull Call<Post> call, @NonNull Response<Post> response) {
+                data.setValue(response.body());
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<Post> call, @NonNull Throwable t) {
                 data.setValue(null);
             }
         });

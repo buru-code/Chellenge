@@ -8,9 +8,13 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 
 public interface PostService {
-    public static String BASE_URL= "";
+     String BASE_URL= "";
 
-    @GET("")
+    @GET("allPost")
     Call<List<Post>> getAllPost();
+
+    @GET("postInfo/{postId}")
+    Call<Post> getPostInfo();
+
 
 }
